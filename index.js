@@ -27,15 +27,16 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
-    const productCollection = client.db('bitJobs').collection('product');
     // const bookingCollection = client.db('carDoctor').collection('bookings');
-
+    const productCollection = client.db('bitJobs').collection('product');
+    const jobCollection = client.db('bitJobs').collection('bJob');
   //   app.get("/api/product", async(req, res)=> { 
   //     const cursor = productCollection.find();
   //   const result = await cursor.toArray()
   //   res.send(result)
   // })
 
+    //job related api
     app.get('/api/category-product', async(req, res) => {
       let queryObj = {};
       const category = req.query.category;
@@ -87,13 +88,7 @@ async function run() {
            maxPrice:updateJob.maxPrice,
            minPrice:updateJob.minPrice,
            description:updateJob.description
-          //  photo: product.photo,
-          //  name:product.name,
-          //  brand:product.brand,
-          //  type:product.type,
-          //  price:product.price,
-          //  description:product.description,
-          //  rating:product.rating,
+          
            
          }
         }
@@ -112,6 +107,12 @@ async function run() {
 
 })
 
+//bit job relate api
+    app.post('/api/user/create-bitJob', async(req, res) => {
+    const product = req.body; console.log(product);
+    const result = await jobCollection.insertOne(product);
+     res.send(result);
+})
 
     // Send a ping to confirm a successful connection
     // await client.db("admin").command({ ping: 1 });

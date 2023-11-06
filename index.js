@@ -108,11 +108,22 @@ async function run() {
 })
 
 //bit job relate api
+//http://localhost:5000/api/user-email?email=shaplarani621@gmail.com
 app.get('/api/user-email', async(req, res) => {
   let queryObj = {};
   const email = req.query.email;
   if(email ){
     queryObj.userEmail  = email ;
+  }
+  const cursor = jobCollection.find(queryObj);
+  const result = await cursor.toArray();
+  res.send(result);
+})
+app.get('/api/buyer-email', async(req, res) => {
+  let queryObj = {};
+  const email = req.query.email;
+  if(email ){
+    queryObj.buyerEmail  = email ;
   }
   const cursor = jobCollection.find(queryObj);
   const result = await cursor.toArray();

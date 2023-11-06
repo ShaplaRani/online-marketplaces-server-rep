@@ -40,6 +40,17 @@ async function run() {
       res.send(result);
     })
 
+    app.get('/api/email-product', async(req, res) => {
+      let queryObj = {};
+      const email = req.query.email;
+      if(email ){
+        queryObj.email  = email ;
+      }
+      const cursor = productCollection.find(queryObj);
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
     app.post('/api/user/create-product', async(req, res) => {
       const product = req.body; console.log(product);
       const result = await productCollection.insertOne(product);

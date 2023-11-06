@@ -61,11 +61,8 @@ async function run() {
     //single data get
     app.get("/api/email-product/:id", async(req, res)=>{
       const id = req.params.id;
-      console.log(id);
-      const query= {_id: new ObjectId(id)}
-      console.log(query);
-      const result = await productCollection.findOne(query)
-      console.log(result);
+       const query= {_id: new ObjectId(id)}
+       const result = await productCollection.findOne(query)
       res.send(result)
 
   })
@@ -76,26 +73,32 @@ async function run() {
       res.send(result);
   })
 
-  app.put('/api/email-product/:id', async(req, res) => {
+  app.put('/api/update-product/:id', async(req, res) => {
     const id =  req.params.id;
     console.log(id);
-        // const product = req.body;
-        // const filter= {_id: new ObjectId(id)}
-        // const option = {upsert: true}
-        // const updateProduct = {
-        //  $set: {
-        //    photo: product.photo,
-        //    name:product.name,
-        //    brand:product.brand,
-        //    type:product.type,
-        //    price:product.price,
-        //    description:product.description,
-        //    rating:product.rating,
+         const updateJob = req.body;
+         const filter= {_id: new ObjectId(id)}
+         const option = {upsert: true}
+        const job = {
+         $set: {
+          title:updateJob.title,
+          category:updateJob.category,
+           date:updateJob.date,
+           maxPrice:updateJob.maxPrice,
+           minPrice:updateJob.minPrice,
+           description:updateJob.description
+          //  photo: product.photo,
+          //  name:product.name,
+          //  brand:product.brand,
+          //  type:product.type,
+          //  price:product.price,
+          //  description:product.description,
+          //  rating:product.rating,
            
-        //  }
-        // }
-        // const result = await automotiveCollection.updateOne(filter, updateProduct, option)
-        // res.send(result)
+         }
+        }
+        const result = await productCollection.updateOne(filter, job, option)
+        res.send(result)
   })
 
   app.delete("/api/email-product/:id", async(req, res)=>{

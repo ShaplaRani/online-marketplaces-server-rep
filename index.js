@@ -29,6 +29,16 @@ async function run() {
     // await client.connect();
     const productCollection = client.db('bitJobs').collection('product');
     // const bookingCollection = client.db('carDoctor').collection('bookings');
+    app.get('/api/category-product', async(req, res) => {
+      let queryObj = {};
+      const category = req.query.category;
+      if(category){
+        queryObj.category = category;
+      }
+      const cursor = productCollection.find(queryObj);
+      const result = await cursor.toArray();
+      res.send(result);
+    })
 
     app.post('/api/user/create-product', async(req, res) => {
       const product = req.body; console.log(product);

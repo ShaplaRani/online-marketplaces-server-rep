@@ -108,6 +108,17 @@ async function run() {
 })
 
 //bit job relate api
+app.get('/api/user-email', async(req, res) => {
+  let queryObj = {};
+  const email = req.query.email;
+  if(email ){
+    queryObj.userEmail  = email ;
+  }
+  const cursor = jobCollection.find(queryObj);
+  const result = await cursor.toArray();
+  res.send(result);
+})
+  
     app.post('/api/user/create-bitJob', async(req, res) => {
     const product = req.body; console.log(product);
     const result = await jobCollection.insertOne(product);

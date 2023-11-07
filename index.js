@@ -136,6 +136,22 @@ app.get('/api/buyer-email', async(req, res) => {
      res.send(result);
 })
 
+app.patch('/api/buyer-email/:id', async(req, res) => {
+  const id = req.params.id;
+  const filter = {_id : new ObjectId(id)}
+  const updateJob = req.body;
+  console.log(updateJob);
+  const updateDoc = {
+      $set : {
+          status: updateJob.status
+      }
+  }
+
+  const result = await  jobCollection.updateOne(filter, updateDoc);
+  console.log(result);
+  res.send(result);
+}) 
+
     // Send a ping to confirm a successful connection
     // await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");

@@ -6,13 +6,12 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config()
 const app = express();
 const port = process.env.PORT || 5000;
-//https://online-marketplaces-server.vercel.app
-//https://online-marketplaces-server.vercel.app
+
+
 //middleware
 app.use(cors({
   origin:[
-    'http://localhost:5174',
-    'http://localhost:5173',
+    
     'https://online-marketplace-4abba.web.app',
     'https://online-marketplace-4abba.firebaseapp.com'
   ],
@@ -177,8 +176,8 @@ async function run() {
 })
 
 //bit job relate api
-//http://localhost:5000/api/user-email?email=shaplarani621@gmail.com
-//http://localhost:5000/api/user-email?sortField=status&sortOrder=asc
+
+
 app.get('/api/user-email',verifyToken, async(req, res) => {
   
   const email = req.query.email;

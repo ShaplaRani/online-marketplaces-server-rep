@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 //middleware
 app.use(cors({
   origin:[
-    
+    'https://redundant-bread.surge.sh',
     'https://online-marketplace-4abba.web.app',
     'https://online-marketplace-4abba.firebaseapp.com'
   ],

@@ -11,6 +11,7 @@ const port = process.env.PORT || 5000;
 //middleware
 app.use(cors({
   origin:[
+    'http://localhost:5174',
     'https://redundant-bread.surge.sh',
     'https://online-marketplace-4abba.web.app',
     'https://online-marketplace-4abba.firebaseapp.com'
@@ -242,7 +243,8 @@ app.patch('/api/delete-complete/:id', async(req, res) => {
   console.log(updateJob);
   const updateDoc = {
       $set : {
-        complete: updateJob.complete
+        complete: updateJob.complete,
+        status: updateJob.status,
       }
   }
 
